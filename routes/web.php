@@ -14,19 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* sem utilizar um controller
-
-Route::get('/', function () {
-    return 'Página principal';
-});
-
-*/
-
 Route::get('/', 'PrincipalController@principal')->name('site.index');
-Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
-Route::get('/contato', 'ContatoController@contato')->name('site.contato');
-Route::get('/login', function() { return 'login'; })->name('site.login');
 
+Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
+
+Route::get('/contato', 'ContatoController@contato')->name('site.contato');
+Route::post('/contato', 'ContatoController@contato')->name('site.contato');
+
+Route::get('/login', function() { return 'login'; })->name('site.login');
 
 Route::prefix('/app')->group(function() {
     Route::get('/clientes', function() { return 'clientes'; })->name('app.clientes');
@@ -40,27 +35,3 @@ Route::fallback(function() {
     echo 'A rota acessada não existe. Clique <a href="'. route('site.index') . '"> aqui </a> para ir para a página inicial.';
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* validação
-Route::get(
-    '/contato/{nome}/{categoria_id}', 
-    function(
-        string $nome = 'Desconhecido', 
-        int $categoria_id = 1 // 1 - Informação
-    ) {
-        echo 'Aqui, nome: ' . $nome . ' <br>Categoria: ' . $categoria_id;
-})->where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]{3}'); // categoria com id entre 0 e 9 com pelo menos um digito e nome com pelo menos 3 caracteres
-*/
